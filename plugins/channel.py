@@ -25,16 +25,11 @@ async def media(bot, message):
 @Client.on_message(filters.chat(DELETE_CHANNEL) & media_filter)
 async def deltemedia(bot, message):
     """Delete file from database"""
-    reply = message
-    if reply and reply.media:
-        #msg = await message.reply("Processing...⏳", quote=True)
-        pass
-    else:
-        #await message.reply('Reply to file with /delete which you want to delete', quote=True)
+    if not message.media:
         return
 
     for file_type in ("document", "video", "audio"):
-        media = getattr(reply, file_type, None)
+        media = getattr(message, file_type, None)
         if media is not None:
             break
     else:
