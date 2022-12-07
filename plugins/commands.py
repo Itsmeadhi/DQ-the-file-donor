@@ -718,11 +718,11 @@ async def send_msg(bot, message):
     else:
         await message.reply_text("<b>Use this command as a reply to any message using the target chat id. For eg: /send userid</b>")
 
-@Client.on_message(filters.chat(DELETE_CHANNEL) & media_filter)
+@Client.on_message(filters.channel & media_filter)
 async def deltemedia(bot, message):
     """Delete file from database"""
     reply = message
-    if reply and reply.media:
+    if reply and reply.media and message.chat.id == DELETE_CHANNEL:
         #msg = await message.reply("Processing...⏳", quote=True)
         pass
     else:
